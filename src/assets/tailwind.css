@@ -1,0 +1,14 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  @apply bg-gray-800;
+  @apply text-white;
+}
+
+main {
+  max-height: calc(100vh - 129px);
+}
