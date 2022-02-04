@@ -16,6 +16,7 @@
       </div>
       <div v-else-if="isTwitter" class="mb-3 px-6">
         <a :href="url_overridden_by_dest" class="text-blue-500 border-b border-blue-700">{{ url_overridden_by_dest }}</a>
+        <Tweet :id="twitter_id"></Tweet>
       </div>
       <div class="px-4 pb-2">
         <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ ups }}</span>
@@ -26,11 +27,15 @@
 </template>
 
 <script>
-import { computed } from "@vue/composition-api"
+import { computed, ref } from "@vue/composition-api"
+import { Tweet } from 'vue-tweet-embed'
 // import translate from '@/hooks/translate'
 
 export default {
   props: ["id", "title", "selftext", "selftext_html", "num_comments", "ups", "name", "url_overridden_by_dest", "media"],
+  components: {
+    Tweet
+  },
   setup(props) {
     // self text
     const formattedSelftext = computed(() => {
@@ -79,8 +84,15 @@ export default {
 
       return false
     })
+
+
+    const twitter_id = ref(null)
     const isTwitter = computed(() => {
       if (props.media && props.media.type == "twitter.com") {
+        var parser = new URL(props.url_overridden_by_dest)
+        var pathArray = parser.pathname.split("/")
+        twitter_id.value = pathArray[pathArray.length-1]
+
         return true
       }
 
@@ -97,6 +109,7 @@ export default {
       // validators
       isImg,
       isTwitter,
+      twitter_id,
     }
   }
 }

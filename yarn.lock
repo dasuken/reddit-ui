@@ -8746,6 +8746,11 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
+"vue-tweet-embed@^2.4.0":
+  "integrity" "sha512-bjViatv0priR1dTEPJpRyWigWGUTUC28VT/sWTaZE+RBWuj/XZvOU5Hzk+O8Mue2dBCAHJrRpoO1VKlcgmHohg=="
+  "resolved" "https://registry.npmjs.org/vue-tweet-embed/-/vue-tweet-embed-2.4.0.tgz"
+  "version" "2.4.0"
+
 "vue-youtube@^1.4.0":
   "integrity" "sha512-PCyfGAouSt6rTX0GLUzpdX2XC52zYf7a9mUhdp53jeDlPoU40hpsvyV3Zg2+947pvbv27ORcmtzm2fqO08kh9Q=="
   "resolved" "https://registry.npmjs.org/vue-youtube/-/vue-youtube-1.4.0.tgz"
@@ -8754,7 +8759,7 @@
     "get-youtube-id" "^1.0.0"
     "youtube-player" "^5.4.0"
 
-"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.3.0", "vue@^2.6.11", "vue@>= 2.5 < 3":
+"vue@^2 || ^3.0.0-0", "vue@^2.0.0", "vue@^2.2.0", "vue@^2.3.0", "vue@^2.6.11", "vue@>= 2.5 < 3":
   "integrity" "sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-2.6.12.tgz"
   "version" "2.6.12"
