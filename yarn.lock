@@ -8695,6 +8695,11 @@
     "esquery" "^1.4.0"
     "lodash" "^4.17.15"
 
+"vue-gtag@1.0":
+  "integrity" "sha512-UcxBLHoG2x4jAIITJT53xfisYwDjlzWWsvEoNAAd/Hbz2B0v80qxEpqwEq+tHZ/+dp3R/SOyVP8S2U3pUKBOrQ=="
+  "resolved" "https://registry.npmjs.org/vue-gtag/-/vue-gtag-1.0.1.tgz"
+  "version" "1.0.1"
+
 "vue-hot-reload-api@^2.3.0":
   "integrity" "sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog=="
   "resolved" "https://registry.npmjs.org/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz"
