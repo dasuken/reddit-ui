@@ -5,11 +5,9 @@
       <post-card
         :id="post.id"
         :title="post.title"
-        :selftext_html="post.selftext_html"
+        :selftext="post.selftext"
         :num_comments="post.num_comments"
-        :url_overridden_by_dest="post.url_overridden_by_dest"
-        :ups="post.ups"
-        :name="post.name"
+        :score="post.score"
         :url="post.url"
       />
     </div>
@@ -17,7 +15,7 @@
       v-for="comment in comments"
       :key="comment.id"
       :body="comment.body"
-      :ups="comment.ups"
+      :score="comment.score"
       :author="comment.author"
       :replies="comment.replies"
     ></comment-card>

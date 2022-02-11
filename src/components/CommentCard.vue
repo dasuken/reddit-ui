@@ -13,7 +13,7 @@
 
             <!-- body messages -->
             <div class="content mb-2">
-              <p v-if="isJPN">{{ body_jpn }}</p>
+              <p v-if="isJPN">{{ body_ja }}</p>
               <p v-else>{{ body }}</p>
             </div>
 
@@ -28,7 +28,7 @@
                   mr-2
                   mb-2
                 "
-                >⬆︎ {{ ups }}</span
+                >⬆︎ {{ score }}</span
               >
               <button
                 class="
@@ -67,10 +67,10 @@
     </div>
     <div v-if="isOpened">
       <comment-card
-        v-for="comment in formattedReplies"
+        v-for="comment in replies"
         :key="comment.id"
         :body="comment.body"
-        :ups="comment.ups"
+        :score="comment.score"
         :author="comment.author"
         :replies="comment.replies"
         class="ml-7"
@@ -80,21 +80,19 @@
 </template>
 
 <script>
-import { ref, computed } from "@vue/composition-api";
+import { ref } from "@vue/composition-api";
 import CommentCard from "@/components/CommentCard.vue";
 import translate from '@/hooks/translate'
 
 export default {
-  props: ["body", "ups", "author", "replies"],
+  name: "comment-card",
+  props: ["body", "score", "author", "replies"],
   components: {
     CommentCard,
   },
   setup(props) {
     const isOpened = ref(false);
     const toggleReplies = () => (isOpened.value = !isOpened.value);
-    const formattedReplies = computed(() => {
-      return props.replies.data.children.filter(reply => reply.kind == "t1").map(reply => reply.data)
-    })
 
     // 翻訳
     const isJPN = ref(false)
@@ -109,7 +107,6 @@ export default {
 
     return {
       isOpened,
-      formattedReplies,
       toggleReplies,
 
       isJPN,

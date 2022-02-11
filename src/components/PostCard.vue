@@ -7,19 +7,16 @@
           <div class="font-bold text-xl mb-4 text-blue-600">(ウィザーズの出席率はここ)</div>
         </router-link>
         <p class="text-gray-700 text-sm">{{ formattedSelftext }}</p>
-        <div class="text-gray-700 text-sm">
-          <div v-html="unescapedSelftext"></div>
-        </div>
       </div>
       <div v-if="isImg" class="flex justify-center mb-3">
-        <img :src="url_overridden_by_dest" class="md:max-w-md w-full" alt="">
+        <img :src="url" class="md:max-w-md w-full" alt="">
       </div>
       <div v-else-if="isTwitter" class="mb-3 px-6">
-        <a :href="url_overridden_by_dest" class="text-blue-500 border-b border-blue-700">{{ url_overridden_by_dest }}</a>
+        <a :href="url" class="text-blue-500 border-b border-blue-700">{{ url }}</a>
         <Tweet :id="twitter_id"></Tweet>
       </div>
       <div class="px-4 pb-2">
-        <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ ups }}</span>
+        <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ score }}</span>
         <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">💬 {{ num_comments }}</span>
       </div>
     </div>
@@ -32,42 +29,18 @@ import { Tweet } from 'vue-tweet-embed'
 // import translate from '@/hooks/translate'
 
 export default {
-  props: ["id", "title", "selftext", "selftext_html", "num_comments", "ups", "name", "url_overridden_by_dest", "media"],
+  props: ["id", "title", "selftext", "num_comments", "score", "url"],
   components: {
     Tweet
   },
   setup(props) {
     // self text
+    // routerによって挙動変えたい
     const formattedSelftext = computed(() => {
-      if (props.selftext && props.selftext.length > 300) {
-        return props.selftext.substr(0, 300) + '...'
+      if (props.selftext && props.selftext.length > 500) {
+        return props.selftext.substr(0, 500) + '...'
       }
       return props.selftext
-    })
-
-    const escapeHTML = (target) => {
-      if (typeof target !== 'string') return target;
-
-      var patterns = {
-        '&lt;'   : '<',
-        '&gt;'   : '>',
-        '&amp;'  : '&',
-        '&quot;' : '"',
-        '&#x27;' : '\'',
-        '&#x60;' : '`'
-      };
-
-      return target.replace(/&(lt|gt|amp|quot|#x27|#x60);/g, function(match) {
-        return patterns[match];
-      });
-    };
-
-
-    const unescapedSelftext = computed(() => {
-      if (props.selftext_html == null) {
-        return ""
-      }
-      return escapeHTML(props.selftext_html)
     })
 
     // translate title
@@ -76,36 +49,26 @@ export default {
     //   title_jp.value = await translate(props.title)
     // })
 
-    // validators
-    const isImg = computed(() => {
-      if (props.url_overridden_by_dest != null && props.media == null) {
-        return true
-      }
+    // validator
 
-      return false
-    })
-
+    const isImg = computed(() => false)
 
     const twitter_id = ref(null)
     const isTwitter = computed(() => {
-      if (props.media && props.media.type == "twitter.com") {
-        var parser = new URL(props.url_overridden_by_dest)
-        var pathArray = parser.pathname.split("/")
-        twitter_id.value = pathArray[pathArray.length-1]
+        var parser = new URL(props.url)
+        var host = parser.host
+        if (host == "www.twitter.com" || host == "twitter.com") {
+          var pathArray = parser.pathname.split("/")
+          twitter_id.value = pathArray[pathArray.length-1]
+          return true
+        }
 
-        return true
+        return false
       }
-
-      return false
-    })
+    )
 
     return {
-      unescapedSelftext,
       formattedSelftext,
-
-      // 翻訳
-      // title_jp,
-
       // validators
       isImg,
       isTwitter,

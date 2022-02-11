@@ -8,11 +8,10 @@ const getPostAndComments = () => {
 
   const load = async (postId) => {
     try {
-      const { data } = await axios.get(`https://www.reddit.com/r/washingtonwizards/comments/${postId}.json?sort=top`)
-      data[0].data.children[0].data.id = postId
-      post.value = data[0].data.children[0].data
-      const commentArray = data[1].data.children
-      comments.value = commentArray.filter(c => c.kind == "t1").map(c => c.data)
+      const baseUrl = process.env.VUE_APP_BASE_URL
+      const { data } = await axios.get(`${baseUrl}/post?id=${postId}`)
+      post.value = data.post
+      comments.value = data.comments
     } catch (err) {
       error.value = err.message;
       console.log(error.value);
