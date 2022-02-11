@@ -47,7 +47,7 @@ export default {
     const title_ja = ref(null)
     const body_ja = ref(null)
     onMounted(async() => {
-       let tmp = await translatePost(props.id, props.title, props.selftext)
+       const tmp = await translatePost(props.id, props.title, props.selftext)
        title_ja.value = tmp.title_ja
        body_ja.value = tmp.body_ja
     })

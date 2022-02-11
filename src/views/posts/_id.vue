@@ -14,6 +14,8 @@
     <comment-card
       v-for="comment in comments"
       :key="comment.id"
+      :id="comment.id"
+      :post_id="post.id"
       :body="comment.body"
       :score="comment.score"
       :author="comment.author"
