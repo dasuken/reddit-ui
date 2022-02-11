@@ -51,14 +51,24 @@ export default {
 
     // validator
 
-    const isImg = computed(() => false)
+    const parser = new URL(props.url)
+    const host = parser.host
+    const pathname = parser.pathname
+
+    const getExt = url => url.split(/[#?]/)[0].split('.').pop().trim()
+
+    const isImg = computed(() => {
+      let ext = getExt(props.url)
+      if (ext == "jpg" || ext == "png") {
+        return true
+      }
+      return false
+    })
 
     const twitter_id = ref(null)
     const isTwitter = computed(() => {
-        var parser = new URL(props.url)
-        var host = parser.host
         if (host == "www.twitter.com" || host == "twitter.com") {
-          var pathArray = parser.pathname.split("/")
+          var pathArray = pathname.split("/")
           twitter_id.value = pathArray[pathArray.length-1]
           return true
         }
