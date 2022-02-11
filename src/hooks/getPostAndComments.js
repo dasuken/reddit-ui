@@ -1,5 +1,5 @@
 import { ref } from '@vue/composition-api';
-import axios from 'axios';
+import axios from '@/axios.js';
 
 const getPostAndComments = () => {
   const post = ref();
@@ -8,8 +8,7 @@ const getPostAndComments = () => {
 
   const load = async (postId) => {
     try {
-      const baseUrl = process.env.VUE_APP_BASE_URL
-      const { data } = await axios.get(`${baseUrl}/post?id=${postId}`)
+      const { data } = await axios.get(`/post?id=${postId}`)
       post.value = data.post
       comments.value = data.comments
     } catch (err) {

@@ -1,5 +1,5 @@
 import { ref } from '@vue/composition-api';
-import axios from 'axios';
+import axios from '@/axios.js';
 
 const getPosts = () => {
   const posts = ref([]);
@@ -8,8 +8,7 @@ const getPosts = () => {
   const load = async (text, limit) => {
     try {
       if (!limit) limit = 10
-      const baseUrl = process.env.VUE_APP_BASE_URL
-      const { data } = await axios.get(`${baseUrl}/posts?subreddit=${text}&limit=${limit}`)
+      const { data } = await axios.get(`/posts?subreddit=${text}&limit=${limit}`)
       posts.value.push(...data)
     } catch (err) {
       error.value = err.message;

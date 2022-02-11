@@ -3,10 +3,11 @@
     <div class="">
       <div class="px-6 py-4">
         <router-link :to="`/posts/${id}`">
-          <div class="font-black text-xl mb-1 text-gray-600">{{ title }}</div>
-          <div class="font-bold text-xl mb-4 text-blue-600">(ウィザーズの出席率はここ)</div>
+          <div class="font-black text-xl mb-1 text-gray-600">{{ title_ja }}</div>
+          <div class="font-bold text-xl mb-4 text-blue-600">{{ title }}</div>
         </router-link>
         <p class="text-gray-700 text-sm">{{ formattedSelftext }}</p>
+        <p class="text-gray-700 text-sm">{{ body_ja }}</p>
       </div>
       <div v-if="isImg" class="flex justify-center mb-3">
         <img :src="url" class="md:max-w-md w-full" alt="">
@@ -24,9 +25,9 @@
 </template>
 
 <script>
-import { computed, ref } from "@vue/composition-api"
+import { onMounted, computed, ref } from "@vue/composition-api"
 import { Tweet } from 'vue-tweet-embed'
-// import translate from '@/hooks/translate'
+import translatePost from '@/hooks/translatePost.js'
 
 export default {
   props: ["id", "title", "selftext", "num_comments", "score", "url"],
@@ -43,19 +44,17 @@ export default {
       return props.selftext
     })
 
-    // translate title
-    // const title_jp = ref(null)
-    // onMounted(async() => {
-    //   title_jp.value = await translate(props.title)
-    // })
+    const title_ja = ref(null)
+    const body_ja = ref(null)
+    onMounted(async() => {
+       let tmp = await translatePost(props.id, props.title, props.selftext)
+       title_ja.value = tmp.title_ja
+       body_ja.value = tmp.body_ja
+    })
 
     // validator
-
-    const parser = new URL(props.url)
-    const host = parser.host
-    const pathname = parser.pathname
-
     const getExt = url => url.split(/[#?]/)[0].split('.').pop().trim()
+    const getTwitterID = url => url.split(/[#?]/)[0].split('/').pop().trim()
 
     const isImg = computed(() => {
       let ext = getExt(props.url)
@@ -67,9 +66,11 @@ export default {
 
     const twitter_id = ref(null)
     const isTwitter = computed(() => {
+        const parser = new URL(props.url)
+        const host = parser.host
         if (host == "www.twitter.com" || host == "twitter.com") {
-          var pathArray = pathname.split("/")
-          twitter_id.value = pathArray[pathArray.length-1]
+
+          twitter_id.value = getTwitterID(props.url)
           return true
         }
 
@@ -79,6 +80,9 @@ export default {
 
     return {
       formattedSelftext,
+      // translated
+      title_ja,
+      body_ja,
       // validators
       isImg,
       isTwitter,
