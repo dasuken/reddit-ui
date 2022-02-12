@@ -13,8 +13,8 @@
 
             <!-- body messages -->
             <div class="content mb-2">
-              <p v-if="isJPN">{{ body_ja }}</p>
-              <p v-else>{{ body }}</p>
+              <p>{{ body_ja }}</p>
+              <p>{{ body }}</p>
             </div>
 
             <!-- under labels -->
@@ -30,7 +30,7 @@
                 "
                 >⬆︎ {{ score }}</span
               >
-              <button
+              <!-- <button
                 class="
                   inline-block
                   pl-3
@@ -42,7 +42,7 @@
                 "
                 @click="toggleLanguage"
                 >翻訳</button
-              >
+              > -->
               <button
                 class="
                   inline-block
@@ -65,7 +65,7 @@
 
       </div>
     </div>
-    <div v-if="isOpened">
+    <div v-if="isReplyOpened">
       <comment-card
         v-for="comment in replies"
         :key="comment.id"
@@ -80,38 +80,39 @@
 </template>
 
 <script>
-import { ref } from "@vue/composition-api";
+import { ref, onMounted } from "@vue/composition-api";
 import CommentCard from "@/components/CommentCard.vue";
-import translate from '@/hooks/translate'
+import translateComment from '@/hooks/translateComment.js'
 
 export default {
   name: "comment-card",
-  props: ["body", "score", "author", "replies"],
+  props: ["id", "post_id", "body", "score", "author", "replies"],
   components: {
     CommentCard,
   },
   setup(props) {
-    const isOpened = ref(false);
-    const toggleReplies = () => (isOpened.value = !isOpened.value);
+    const isReplyOpened = ref(false);
+    const toggleReplies = () => (isReplyOpened.value = !isReplyOpened.value);
 
     // 翻訳
-    const isJPN = ref(false)
-    const body_jpn = ref(null)
-    const toggleLanguage = async () => {
-      // if current language is english and don't translate yet.
-      if (!isJPN.value && body_jpn.value == null) {
-        body_jpn.value = await translate(props.body)
-      }
-      isJPN.value = !isJPN.value
-    }
+    const body_ja = ref(null)
+    onMounted(async () => {
+      const tmp = await translateComment(props.id, props.post_id, props.body)
+      body_ja.value = tmp.body_ja
+    })
+    // const toggleLanguage = async () => {
+    //   // if current language is english and don't translate yet.
+    //   if (!isJPN.value && body_jpn.value == null) {
+    //     body_jpn.value = await translate(props.body)
+    //   }
+    //   isJPN.value = !isJPN.value
+    // }
 
     return {
-      isOpened,
+      isReplyOpened,
       toggleReplies,
 
-      isJPN,
-      body_jpn,
-      toggleLanguage,
+      body_ja,
     };
   },
 };
