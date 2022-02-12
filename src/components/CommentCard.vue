@@ -1,11 +1,16 @@
 <template>
   <article class="post-card grey-300 bg-gray-100">
     <div class="overflow-hidden">
-      <div class="px-4 py-3">
+      <div class="p-5">
 
         <!-- author info -->
-        <p class="author text-gray-500 text-sm mb-2">
-          {{ author }}
+        <p class="author text-gray-600 text-sm mb-4">
+          <span class="incline-block mr-5">
+            {{ author }}
+          </span>
+          <span class="text-gray-400 text-xs inline-block">
+            {{created_utc}}
+          </span>
         </p>
 
         <div>
@@ -13,8 +18,8 @@
 
             <!-- body messages -->
             <div class="content mb-2">
-              <p>{{ body_ja }}</p>
-              <p>{{ body }}</p>
+              <p class="font-bold pb-4">{{ body_ja }}</p>
+              <p class="text-gray-500">{{ body }}</p>
             </div>
 
             <!-- under labels -->
@@ -86,27 +91,19 @@ import translateComment from '@/hooks/translateComment.js'
 
 export default {
   name: "comment-card",
-  props: ["id", "post_id", "body", "score", "author", "replies"],
+  props: ["id", "post_id", "body", "score", "author", "created_utc", "replies"],
   components: {
     CommentCard,
   },
   setup(props) {
     const isReplyOpened = ref(false);
     const toggleReplies = () => (isReplyOpened.value = !isReplyOpened.value);
-
     // 翻訳
     const body_ja = ref(null)
     onMounted(async () => {
       const tmp = await translateComment(props.id, props.post_id, props.body)
       body_ja.value = tmp.body_ja
     })
-    // const toggleLanguage = async () => {
-    //   // if current language is english and don't translate yet.
-    //   if (!isJPN.value && body_jpn.value == null) {
-    //     body_jpn.value = await translate(props.body)
-    //   }
-    //   isJPN.value = !isJPN.value
-    // }
 
     return {
       isReplyOpened,

@@ -19,6 +19,7 @@
       :body="comment.body"
       :score="comment.score"
       :author="comment.author"
+      :created_utc="comment.created_utc"
       :replies="comment.replies"
     ></comment-card>
   </div>

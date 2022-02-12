@@ -1,25 +1,25 @@
 <template>
   <article class="post-card p-1 mb-5 border border-gray-500 shadow-lg grey-300 bg-white rounded-md">
     <div class="">
-      <div class="px-6 py-4">
-        <router-link :to="`/posts/${id}`">
+      <router-link :to="`/posts/${id}`">
+        <div class="px-6 py-4">
           <div class="font-black text-xl mb-1 text-gray-600">{{ title_ja }}</div>
-          <div class="font-bold text-xl mb-4 text-blue-600">{{ title }}</div>
-        </router-link>
-        <p class="text-gray-700 text-sm">{{ formattedSelftext }}</p>
-        <p class="text-gray-700 text-sm">{{ body_ja }}</p>
-      </div>
-      <div v-if="isImg" class="flex justify-center mb-3">
-        <img :src="url" class="md:max-w-md w-full" alt="">
-      </div>
-      <div v-else-if="isTwitter" class="mb-3 px-6">
-        <a :href="url" class="text-blue-500 border-b border-blue-700">{{ url }}</a>
-        <Tweet :id="twitter_id"></Tweet>
-      </div>
-      <div class="px-4 pb-2">
-        <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ score }}</span>
-        <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">💬 {{ num_comments }}</span>
-      </div>
+          <div class="font-bold text-xl mb-5 text-blue-600">{{ title }}</div>
+          <p class="text-gray-600 text-sm mb-2">{{ body_ja }}</p>
+          <p class="text-gray-500 font-semibold text-sm">{{ formattedSelftext }}</p>
+        </div>
+        <div v-if="isImg" class="flex justify-center mb-3">
+          <img :src="url" class="md:max-w-md w-full" alt="">
+        </div>
+        <div v-else-if="isTwitter" class="mb-3 px-6">
+          <a :href="url" class="text-blue-500 border-b border-blue-700">{{ url }}</a>
+          <Tweet :id="twitter_id"></Tweet>
+        </div>
+        <div class="px-4 pb-2">
+          <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ score }}</span>
+          <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">💬 {{ num_comments }}</span>
+        </div>
+      </router-link>
     </div>
   </article>
 </template>
