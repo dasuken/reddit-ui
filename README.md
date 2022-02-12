@@ -1,5 +1,3 @@
-# composition-twitter
-
 ## Project setup
 ```
 yarn install
