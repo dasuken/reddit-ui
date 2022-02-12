@@ -1,6 +1,8 @@
 <template>
   <div class="mb-10">
-    <div v-if="!post">loading...</div>
+    <div v-if="!post">
+      <vue-loading type="spin" color="orange" :size="{ width: '100px', height: '100px' }"></vue-loading>
+    </div>
     <div v-else>
       <post-card
         :id="post.id"
@@ -31,10 +33,13 @@ import CommentCard from "@/components/CommentCard.vue";
 import PostCard from "@/components/PostCard.vue";
 import getPostAndComments from "@/hooks/getPostAndComments.js";
 
+import { VueLoading } from 'vue-loading-template'
+
 export default {
   components: {
     CommentCard,
     PostCard,
+    VueLoading,
   },
   setup(_, context) {
     const route = context.root.$route;

@@ -10,7 +10,6 @@ const getPostAndComments = () => {
     try {
       const { data } = await axios.get(`/post?id=${postId}`)
       post.value = data.post
-      comments.value = data.comments
       console.log(comments.value)
     } catch (err) {
       error.value = err.message;
