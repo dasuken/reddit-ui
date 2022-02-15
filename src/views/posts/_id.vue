@@ -4,7 +4,7 @@
       <vue-loading type="spin" color="orange" :size="{ width: '100px', height: '100px' }"></vue-loading>
     </div>
     <div v-else>
-      <post-card
+      <post-card-detail
         :id="post.id"
         :title="post.title"
         :selftext="post.selftext"
@@ -30,7 +30,7 @@
 <script>
 import { onMounted } from "@vue/composition-api";
 import CommentCard from "@/components/CommentCard.vue";
-import PostCard from "@/components/PostCard.vue";
+import PostCardDetail from "@/components/PostCardDetail.vue";
 import getPostAndComments from "@/hooks/getPostAndComments.js";
 
 import { VueLoading } from 'vue-loading-template'
@@ -38,7 +38,7 @@ import { VueLoading } from 'vue-loading-template'
 export default {
   components: {
     CommentCard,
-    PostCard,
+    PostCardDetail,
     VueLoading,
   },
   setup(_, context) {

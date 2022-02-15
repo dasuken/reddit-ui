@@ -1,25 +1,21 @@
 <template>
   <article class="post-card p-1 mb-5 border border-gray-500 shadow-lg grey-300 bg-white rounded-md">
-    <div class="">
-      <router-link :to="`/posts/${id}`">
-        <div class="px-6 py-4">
-          <div class="font-black text-xl mb-1 text-gray-600">{{ title_ja }}</div>
-          <div class="font-bold text-sm mb-5 text-blue-600">{{ title }}</div>
-          <p class="text-gray-600 text-sm mb-2">{{ body_ja }}</p>
-          <p class="text-gray-600 text-sm mb-2">{{ body }}</p>
-        </div>
-        <div v-if="isImg" class="flex justify-center mb-3">
-          <img :src="url" class="md:max-w-md w-full" alt="">
-        </div>
-        <div v-else-if="isTwitter" class="mb-3 px-6">
-          <a :href="url" class="text-blue-500 border-b border-blue-700">{{ url }}</a>
-          <Tweet :id="twitter_id"></Tweet>
-        </div>
-        <div class="px-4 pb-2">
-          <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ score }}</span>
-          <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">💬 {{ num_comments }}</span>
-        </div>
-      </router-link>
+    <div class="px-6 py-4">
+      <div class="font-black text-xl mb-1 text-gray-600">{{ title_ja }}</div>
+      <div class="font-bold text-sm mb-5 text-blue-600">{{ title }}</div>
+      <p class="text-gray-600 font-bold text-md mb-2">{{ body_ja }}</p>
+      <p class="text-gray-500 text-sm mb-2">{{ selftext }}</p>
+    </div>
+    <div v-if="isImg" class="flex justify-center mb-3">
+      <img :src="url" class="md:max-w-md w-full" alt="">
+    </div>
+    <div v-else-if="isTwitter" class="mb-3 px-6">
+      <a :href="url" class="text-blue-500 border-b border-blue-700">{{ url }}</a>
+      <Tweet :id="twitter_id"></Tweet>
+    </div>
+    <div class="px-4 pb-2">
+      <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">👍 {{ score }}</span>
+      <span class="inline-block  px-3 py-1 text-md font-semibold text-gray-700 mr-2 mb-2">💬 {{ num_comments }}</span>
     </div>
   </article>
 </template>
@@ -70,8 +66,6 @@ export default {
     )
 
     return {
-      formattedSelftext,
-      // translated
       title_ja,
       body_ja,
       // validators
