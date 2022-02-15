@@ -38,8 +38,8 @@ export default {
     // self text
     // routerによって挙動変えたい
     const formattedSelftext = computed(() => {
-      if (props.selftext && props.selftext.length > 200) {
-        return props.selftext.substr(0, 200) + '...'
+      if (props.selftext && props.selftext.length > 150) {
+        return props.selftext.substr(0, 150) + '...'
       }
       return props.selftext
     })
