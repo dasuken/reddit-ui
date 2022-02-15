@@ -58,7 +58,7 @@ export default {
     const { posts, error, load, loading } = getPosts()
     let subreddit = ref("washingtonwizards");
     onMounted(async() => {
-      await load(subreddit.value, 10)
+      await load(subreddit.value, 7)
     })
 
     const reddit_url = ref(`https://www.reddit.com/r/${subreddit.value}`)
