@@ -1,7 +1,7 @@
 <template>
-  <article class="post-card grey-300 bg-gray-100">
+  <article class="post-card grey-300 bg-gray-100 rounded-sm mb-2">
     <div class="overflow-hidden">
-      <div class="p-5">
+      <div class="px-5 py-3">
 
         <!-- author info -->
         <p class="author text-gray-600 text-sm mb-4">

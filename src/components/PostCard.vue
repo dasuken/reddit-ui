@@ -4,8 +4,8 @@
       <router-link :to="`/posts/${id}`">
         <div class="px-6 py-4">
           <div class="font-black text-xl mb-1 text-gray-600">{{ title_ja }}</div>
-          <div class="font-bold text-xl mb-5 text-blue-600">{{ title }}</div>
-          <p class="text-gray-600 text-sm mb-2">{{ body_ja }}</p>
+          <div class="font-bold text-sm mb-5 text-blue-600">{{ title }}</div>
+          <!-- <p class="text-gray-600 text-sm mb-2">{{ body_ja }}</p> -->
           <p class="text-gray-500 font-semibold text-sm">{{ formattedSelftext }}</p>
         </div>
         <div v-if="isImg" class="flex justify-center mb-3">
@@ -38,8 +38,8 @@ export default {
     // self text
     // routerによって挙動変えたい
     const formattedSelftext = computed(() => {
-      if (props.selftext && props.selftext.length > 500) {
-        return props.selftext.substr(0, 500) + '...'
+      if (props.selftext && props.selftext.length > 300) {
+        return props.selftext.substr(0, 300) + '...'
       }
       return props.selftext
     })
