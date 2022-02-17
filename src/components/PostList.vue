@@ -6,9 +6,9 @@
 
     <div v-else>
       <div class="text-red" v-if="error">
-        {{error}}
+        <error-page message="error" />
       </div>
-      <div class="text-white">
+      <div class="text-white" v-else>
         <div>
           <post-card
             v-for="post in posts"
@@ -43,8 +43,9 @@
 
 <script>
 import { ref, onMounted } from "@vue/composition-api";
-import PostCard from "../components/PostCard.vue";
-import getPosts from "@/hooks/getPosts.js"
+import PostCard from "@/components/PostCard.vue";
+import getPosts from "@/hooks/getPosts.js";
+import ErrorPage from "@/components/ErrorPage.vue";
 
 import { VueLoading } from 'vue-loading-template'
 
@@ -52,6 +53,7 @@ export default {
   name: "PostList",
   components: {
     PostCard,
+    ErrorPage,
     VueLoading,
   },
   setup() {
