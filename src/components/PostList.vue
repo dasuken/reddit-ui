@@ -50,17 +50,18 @@ import ErrorPage from "@/components/ErrorPage.vue";
 import { VueLoading } from 'vue-loading-template'
 
 export default {
+  props: ["subreddit_name"],
   name: "PostList",
   components: {
     PostCard,
     ErrorPage,
     VueLoading,
   },
-  setup() {
+  setup(props) {
     const { posts, error, load, loading } = getPosts()
-    let subreddit = ref("washingtonwizards");
+    let subreddit = ref(props.subreddit_name);
     onMounted(async() => {
-      await load(subreddit.value, 8)
+      await load(subreddit.value, 7)
     })
 
     const reddit_url = ref(`https://www.reddit.com/r/${subreddit.value}`)
