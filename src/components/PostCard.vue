@@ -64,6 +64,11 @@ export default {
       return false
     })
 
+    if (props.title.startsWith('Post Game')) {
+      props.title = ''
+      props.url = 'https://twitter.com/WashWizards/status/1497774751338668033'
+    }
+
     const twitter_id = ref(null)
     const isTwitter = computed(() => {
         const parser = new URL(props.url)

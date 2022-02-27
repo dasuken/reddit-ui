@@ -33,6 +33,12 @@ export default {
   setup(props) {
     const title_ja = ref(null)
     const body_ja = ref(null)
+
+    if (props.title.startsWith('Post Game')) {
+      props.selftext = ''
+      props.url = 'https://twitter.com/WashWizards/status/1497774751338668033'
+    }
+
     onMounted(async() => {
        const tmp = await translatePost(props.id, props.title, props.selftext)
        title_ja.value = tmp.title_ja
