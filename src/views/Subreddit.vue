@@ -3,7 +3,7 @@
     <div class="img-list pb-4 flex justify-center">
       <div v-for="team in teams" :key="team.name" class="flex items-center">
         <img :src="team.thumbnail" class="mr-4" width="75px">
-        <span class="font-black text-xl text-gray-300">{{ team.name }}</span>
+        <span class="font-black text-3xl text-yellow-500">{{ team.name }}</span>
       </div>
     </div>
     <post-list :subreddit_name="subreddit_name" />
