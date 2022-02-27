@@ -18,7 +18,7 @@
 
             <!-- body messages -->
             <div class="content mb-2">
-              <p class="font-bold pb-4">{{ body_ja }}</p>
+              <p v-if="body_ja != null" class="font-bold pb-4">{{ body_ja }}</p>
               <p class="text-gray-500">{{ body }}</p>
             </div>
 
