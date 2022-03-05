@@ -36,7 +36,7 @@ export default {
 
     if (props.title.startsWith('Post Game')) {
       props.selftext = ''
-      props.url = 'https://twitter.com/washwizardsjp/status/1498848852287242246'
+      props.url = 'https://twitter.com/washwizardsjp/status/1499935942240473090'
     }
 
     onMounted(async() => {
