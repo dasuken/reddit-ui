@@ -66,7 +66,7 @@ export default {
 
     if (props.title.startsWith('Post Game')) {
       props.title = ''
-      props.url = 'https://twitter.com/washwizardsjp/status/1501799215915155460'
+      props.url = 'https://twitter.com/washwizardsjp/status/1502524571903488000'
     }
 
     const twitter_id = ref(null)
