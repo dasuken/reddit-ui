@@ -65,8 +65,7 @@ export default {
     })
 
     if (props.title.startsWith('Post Game')) {
-      props.title = ''
-      props.url = 'https://twitter.com/washwizardsjp/status/1502877672019427328'
+      props.url = 'https://twitter.com/washwizardsjp/status/1508241801571758085'
     }
 
     const twitter_id = ref(null)
